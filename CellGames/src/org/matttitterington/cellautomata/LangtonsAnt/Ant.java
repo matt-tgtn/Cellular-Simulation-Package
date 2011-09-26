@@ -72,7 +72,12 @@ public class Ant {
 		switch (this.direction) {
 		case 0:
 			newx = x;
-			newy = Math.abs(y - 1);
+			newy = y - 1;
+			
+			if (newy < 0) {
+				newy += this.parent.cellArrayHeight;
+			}
+			
 			break;
 		
 		case 1:
@@ -86,8 +91,14 @@ public class Ant {
 			break;
 			
 		case 3:
-			newx = Math.abs(x-1);
+			newx = x-1;
 			newy = y;
+			
+			
+			if (newx < 0) {
+				newx += this.parent.cellArrayWidth;
+			}
+			
 			break;
 		}
 		
