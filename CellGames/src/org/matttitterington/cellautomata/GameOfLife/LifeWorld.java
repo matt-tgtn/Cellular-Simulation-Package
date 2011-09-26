@@ -4,18 +4,15 @@ import java.util.ArrayList;
 
 public class LifeWorld {
 	ArrayList<ArrayList<Boolean>> cellsArray;
-	ArrayList<ArrayList<CellCanvas>> GUIArray;
 	GameInterface parent;
 	
 	public LifeWorld(GameInterface GUIParent) {
 		this.parent = GUIParent;
-		this.GUIArray = GUIParent.cells;
 		this.syncToInternal();
 	}
 	
 	public LifeWorld(GameInterface GUIParent, ArrayList<ArrayList<Boolean>> cellsArray) {
 		this.parent = GUIParent;
-		this.GUIArray = GUIParent.cells;
 		this.cellsArray = cellsArray;
 	}
 	
@@ -66,45 +63,7 @@ public class LifeWorld {
 		int alive = 0;
 		int[] result = new int[2];
 		
-		if (xc == 0){ //On left boundary
-			
-			if (yc == 0) {//At top
-				result = this.getNeighbourStates(xc, yc, 5, 0, 1, 0, 1);
-			}
-			else if (yc == (cellsArray.size()-1)) {//At bottom
-				result = this.getNeighbourStates(xc, yc, 5, 0, 1, -1, 0);
-			}
-			else {//Fine on y axis
-				result = this.getNeighbourStates(xc, yc, 3, 0, 1, -1, 1);
-			}
-			
-		}
-		else if (xc == (cellsArray.get(0).size() - 1)) { //On right boundary
-			
-			if (yc == 0) {//At top
-				result = this.getNeighbourStates(xc, yc, 5, -1, 0, 0, 1);
-			}
-			else if (yc == (cellsArray.size()-1)) {//At bottom
-				result = this.getNeighbourStates(xc, yc, 5, -1, 0, -1, 0);
-			}
-			else {//Fine on y axis
-				result = this.getNeighbourStates(xc, yc, 3, -1, 0, -1, 1);
-			}
-
-		}
-		else { //OK on x axis
-			
-			if (yc == 0) {//At top
-				result = this.getNeighbourStates(xc, yc, 3, -1, 1, 0, 1);
-			}
-			else if (yc == (cellsArray.size()-1)) {//At bottom
-				result = this.getNeighbourStates(xc, yc, 3, -1, 1, -1, 0);
-			}
-			else {//Fine on y axis
-				result = this.getNeighbourStates(xc, yc, 0, -1, 1, -1, 1);
-			}
-
-		}
+		result = this.getNeighbourStates(xc, yc);
 		
 		
 		alive = result[0];
@@ -142,16 +101,32 @@ public class LifeWorld {
 		
 	}
 	
-	public int[] getNeighbourStates(int xc,int yc, int deadSupplement, int xlower, int xupper, int ylower, int yupper) {
+	public int[] getNeighbourStates(int xc,int yc) {
 		int alive = 0;
 		int dead = 0;
 		
-		for (int y = ylower; y <= yupper; y++) {
-			for (int x = xlower; x <= xupper; x++) {
+		for (int y = -1; y <= 1; y++) {
+			for (int x = -1; x <= 1; x++) {
+				int cellInspectX = xc+x;
+				int cellInspectY = yc+y;
 				
+				//Ensure cellInspectX is in range
+				if (cellInspectX < 0) {
+					cellInspectX += this.cellsArray.get(0).size();
+				} else if (cellInspectX > (this.cellsArray.get(0).size() -1)) {
+					cellInspectX %= this.cellsArray.get(0).size();
+				}
+				
+				//Ensure cellinspecty is in range
+				if (cellInspectY < 0) {
+					cellInspectY += this.cellsArray.size();
+				} else if (cellInspectY > (this.cellsArray.size() -1)) {
+					cellInspectY %= this.cellsArray.size();
+				}
+						
 				//If x and y are both not equal 0.
 				if (((x==0)&&(y==0))==false) {
-					if (cellsArray.get(yc+y).get(xc+x)) {
+					if (cellsArray.get(cellInspectY).get(cellInspectX)) {
 						alive += 1;
 					} else {
 						dead += 1;
@@ -160,7 +135,6 @@ public class LifeWorld {
 			}
 		}
 		
-		dead += deadSupplement;
 		
 		int[] result = new int[2];
 		result[0] = alive;
@@ -170,11 +144,5 @@ public class LifeWorld {
 		
 	}
 	
-	public void debug() {
-		for (ArrayList<CellCanvas> array : this.GUIArray) {
-			for (CellCanvas cellCanvas : array) {
-				cellCanvas.setState(false);
-			}
-		}
-	}
+
 }

@@ -15,9 +15,6 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
 import net.miginfocom.swing.MigLayout;
-import java.awt.FlowLayout;
-import javax.swing.border.LineBorder;
-import java.awt.Color;
 
 public class Tutorial {
 
@@ -99,7 +96,6 @@ public class Tutorial {
 		BasicsMainContainer.add(CellCanvasAliveContainer, "cell 0 1");
 		
 		JPanel CellCanvasAlive = new CellCanvas(true);
-		FlowLayout flowLayout = (FlowLayout) CellCanvasAlive.getLayout();
 		CellCanvasAliveContainer.add(CellCanvasAlive);
 		
 		JTextPane txtpnAliveCell = new JTextPane();

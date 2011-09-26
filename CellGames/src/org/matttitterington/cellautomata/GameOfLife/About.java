@@ -1,17 +1,15 @@
 package org.matttitterington.cellautomata.GameOfLife;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.EventQueue;
+import java.awt.SystemColor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
-import java.awt.SystemColor;
 
 public class About {
 
@@ -24,7 +22,7 @@ public class About {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					About window = new About();
+					 new About();
 					
 				} catch (Exception e) {
 					e.printStackTrace();

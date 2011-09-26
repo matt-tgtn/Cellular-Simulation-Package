@@ -1,6 +1,7 @@
 package org.matttitterington.cellautomata.GameOfLife;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -12,12 +13,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.EtchedBorder;
+import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
 import net.miginfocom.swing.MigLayout;
-import java.awt.FlowLayout;
-import javax.swing.border.LineBorder;
-import java.awt.Color;
 
 public class Tutorial {
 
@@ -99,7 +98,6 @@ public class Tutorial {
 		BasicsMainContainer.add(CellCanvasAliveContainer, "cell 0 1");
 		
 		JPanel CellCanvasAlive = new CellCanvas(true);
-		FlowLayout flowLayout = (FlowLayout) CellCanvasAlive.getLayout();
 		CellCanvasAliveContainer.add(CellCanvasAlive);
 		
 		JTextPane txtpnAliveCell = new JTextPane();

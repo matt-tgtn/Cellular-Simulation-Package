@@ -27,7 +27,7 @@ public class Launcher {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Launcher window = new Launcher();
+					new Launcher();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

@@ -23,7 +23,7 @@ public class About {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					About window = new About();
+					new About();
 					
 				} catch (Exception e) {
 					e.printStackTrace();

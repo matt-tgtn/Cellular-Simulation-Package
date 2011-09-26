@@ -43,11 +43,6 @@ public class LifeGameRunner extends SwingWorker<Void, Void>{
 		return null;
 		
 	}
-
-	public void debug() {
-		this.currentWorld.debug();
-		
-	}
 	
 	private class PerformGameIteration extends java.util.TimerTask {
 		LifeGameRunner parent;
