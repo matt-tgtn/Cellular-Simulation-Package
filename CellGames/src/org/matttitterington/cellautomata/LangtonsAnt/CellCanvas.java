@@ -39,8 +39,8 @@ public class CellCanvas extends JPanel implements MouseListener{
 		this.colourMap = new HashMap<Integer, Color>();
 		this.colourMap.put(0, new Color(0x000000)); //Black
 		this.colourMap.put(1, new Color(0x660099)); //Violet
-		this.colourMap.put(2, new Color(0x000066)); //Dark blue
-		this.colourMap.put(3, new Color(0x0099FF)); //Blue
+		this.colourMap.put(2, new Color(0x0099FF)); //Dark blue
+		this.colourMap.put(3, new Color(0x00FFFF)); //Blue
 		this.colourMap.put(4, new Color(0x00FFCC)); //Blue-green
 		this.colourMap.put(5, new Color(0x33FF33)); //Green
 		this.colourMap.put(6, new Color(0xCCFF33)); //Yellow

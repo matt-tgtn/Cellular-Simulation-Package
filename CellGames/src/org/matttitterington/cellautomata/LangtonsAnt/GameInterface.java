@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -20,8 +21,11 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JToggleButton;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import org.matttitterington.cellautomata.Launcher.Launcher;
 
@@ -61,7 +65,7 @@ public class GameInterface extends JFrame{
 		//SET GLOBAL PARAMETERS
 		this.cellArrayWidth = width;
 		this.cellArrayHeight = height;
-		this.fps = 60;
+		this.fps = 120;
 		
 		
 		//instantiate variables
@@ -102,6 +106,77 @@ public class GameInterface extends JFrame{
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
+		
+		//Menu for the rate of the game
+				JMenu menuSpeed = new JMenu("Speed");
+				
+				ButtonGroup group = new ButtonGroup();
+				final JRadioButtonMenuItem speed1 = new JRadioButtonMenuItem("6 FPS");
+				speed1.addChangeListener(new ChangeListener() {
+					public void stateChanged(ChangeEvent arg0) {
+						
+						fps = 6;
+
+						
+						if (running && speed1.isSelected()) {
+							stopGame();
+							startGame();
+						} 
+					}
+				});
+				speed1.setSelected(true);
+				final JRadioButtonMenuItem speed2 = new JRadioButtonMenuItem("30 FPS");
+				speed2.addChangeListener(new ChangeListener() {
+					public void stateChanged(ChangeEvent arg0) {
+						
+						fps = 30;
+
+						
+						if (running && speed2.isSelected()) {
+							stopGame();
+							startGame();
+						} 
+					}
+				});
+				
+				final JRadioButtonMenuItem speed3 = new JRadioButtonMenuItem("60 FPS");
+				speed3.addChangeListener(new ChangeListener() {
+					public void stateChanged(ChangeEvent arg0) {
+						
+						fps = 60;
+
+						
+						if (running && speed3.isSelected()) {
+							stopGame();
+							startGame();
+						} 
+					}
+				});
+				final JRadioButtonMenuItem speed4 = new JRadioButtonMenuItem("120 FPS");
+				speed4.addChangeListener(new ChangeListener() {
+					public void stateChanged(ChangeEvent arg0) {
+						
+						fps = 120;
+						
+						if (running && speed4.isSelected()) {
+							stopGame();
+							startGame();
+						} 
+					}
+				});
+				
+				group.add(speed1);
+				menuSpeed.add(speed1);
+				group.add(speed2);
+				menuSpeed.add(speed2);
+				group.add(speed3);
+				menuSpeed.add(speed3);
+				group.add(speed4);
+				menuSpeed.add(speed4);
+				
+				menuBar.add(menuSpeed);
+				
+		//Declare the help menu
 		
 		JMenu mnAbout = new JMenu("Help");
 		menuBar.add(mnAbout);
