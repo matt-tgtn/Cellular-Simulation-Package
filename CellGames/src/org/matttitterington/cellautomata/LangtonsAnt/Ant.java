@@ -8,8 +8,9 @@ public class Ant {
 	GameInterface parent;
 	int frame;
 	
-	public Ant(GameInterface parent) {
-		this.parent = parent;
+
+	public Ant(GameInterface gameInterface) {
+		this.parent = gameInterface;
 		this.frame = 1;
 	}
 
@@ -43,16 +44,14 @@ public class Ant {
 		
 	}
 
+
 	public void performOneIteration() {
 		CellCanvas currentCell = this.parent.cells.get(y).get(x);
 		
-		if (currentCell.getState()) {
-			this.rotateAnt("LEFT");
-		} else {
-			this.rotateAnt("RIGHT");
-		}
+		//turn the ant
+		this.rotateAnt(currentCell.getTurnDirection());
 		
-		currentCell.flipState();
+		currentCell.incrementState();
 		
 		this.moveAnt();
 		
@@ -112,15 +111,15 @@ public class Ant {
 		
 	}
 
-	private void rotateAnt(String dir) {
-		if (dir == "LEFT") {
+	private void rotateAnt(char dir) {
+		if (dir == "L".charAt(0)) {
 			this.direction -= 1;
 			
 			while (this.direction < 0) {
 				this.direction += 4;
 			}
 		}
-		else if (dir == "RIGHT") {
+		else if (dir == "R".charAt(0)) {
 			this.direction += 1;
 			this.direction %= 4;
 		} else {

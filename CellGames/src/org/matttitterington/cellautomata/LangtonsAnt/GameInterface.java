@@ -7,9 +7,10 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
-import javax.swing.AbstractButton;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -25,7 +26,7 @@ import javax.swing.border.EmptyBorder;
 import org.matttitterington.cellautomata.Launcher.Launcher;
 
 @SuppressWarnings("serial")
-public class GameInterface extends JFrame implements ActionListener{
+public class GameInterface extends JFrame{
 	
 	ArrayList<ArrayList<CellCanvas>> cells; //Will be used in the form .get(y).get(x)
 	int cellArrayWidth;
@@ -36,22 +37,26 @@ public class GameInterface extends JFrame implements ActionListener{
 	JToggleButton buttonRun;
 	int fps;
 	JLabel frameLabel;
+	String configuration;
 	
 	
-	public GameInterface(String title) {
+	public GameInterface(String title, int width, int height, String configuration) {
 		
+		//TODO implement error checking for the configuration
+		
+		
+		//SET GLOBAL PARAMETERS
+		this.cellArrayWidth = width;
+		this.cellArrayHeight = height;
+		this.fps = 60;
+		this.configuration = configuration; //Standard ant configuration
 		
 		//instantiate variables
 		this.cells = new ArrayList<ArrayList<CellCanvas>>();
 		this.running = false;
 		this.gameRunner = new AntGameRunner(this);
-		this.ant = new Ant(this);
-		
-		//SET GLOBAL PARAMETERS
-		this.cellArrayWidth = 50;
-		this.cellArrayHeight = 50;
-		this.fps = 60;
-		
+		this.ant = new Ant(this);		
+				
 		//Set swing  params
 		this.setTitle(title);
 		this.setSize(807,950);
@@ -128,9 +133,9 @@ public class GameInterface extends JFrame implements ActionListener{
 				
 				for (int x = 0; x < cellArrayWidth; x++) {
 					
-					CellCanvas temp = new CellCanvas(this);
+					CellCanvas temp = new CellCanvas(this, configuration);
 			
-					temp.setState(false);
+					temp.setState(CellCanvas.DEFAULT);
 					temp.setPreferredSize(new Dimension(15,15));
 					
 					panelGrid.add(temp);
@@ -148,8 +153,51 @@ public class GameInterface extends JFrame implements ActionListener{
 			JPanel panelButton = new JPanel();
 		
 			buttonRun = new JToggleButton("Run");
+			buttonRun.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent arg0) {
+					//Will cancel the thread and clear cells if clicked when running
+					GameInterface i = GameInterface.this;
+					
+					if (i.running) {
+						stopGame();
+						
+					} else {
+						startGame();
+					}
+				}
+
+				
+
+				
+			});
 			JButton buttonStep = new JButton("Step");
+			buttonStep.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					if (!running) {
+						step();
+					}
+				}
+			});
 			JButton buttonReset = new JButton("Reset");
+			buttonReset.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					//Will cancel the thread and clear cells if clicked when running
+					GameInterface i = GameInterface.this;
+					
+					if (i.running) {
+						stopGame();
+						
+						i.resetCells();
+						
+						
+					} else {
+						i.resetCells();
+					}
+				}
+			});
 			this.frameLabel = new JLabel("Frame: 1");
 		
 			panelButton.add(buttonRun);
@@ -158,10 +206,7 @@ public class GameInterface extends JFrame implements ActionListener{
 			panelButton.add(Box.createRigidArea(new Dimension(50,0)));
 			panelButton.add(this.frameLabel);
 			
-			//Add the event listeners
-			buttonRun.addActionListener(this);
-			buttonStep.addActionListener(this);
-			buttonReset.addActionListener(this);
+
 		
 		panelMain.add(panelButton, BorderLayout.PAGE_END);
 			
@@ -171,60 +216,14 @@ public class GameInterface extends JFrame implements ActionListener{
 
 
 	public static void main(String [] args) {
-		new GameInterface("Langton's ant");
+		new GameInterface("Langton's ant", 50,50, "RLLR");
 	}
 
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-			if (e.getSource() instanceof JButton) {
-				
-				if (((AbstractButton) e.getSource()).getText() == "Step") {
-					if (!this.running) {
-						this.gameRunner.step();
-					}
-					
-				} else {
-					
-					//Will cancel the thread and clear cells if clicked when running
-					
-					if (this.running) {
-						this.running = false;
-						this.gameRunner.cancel(true);
-						this.buttonRun.setSelected(false);
-						
-						this.resetCells();
-						
-						this.gameRunner = new AntGameRunner(this);
-					} else {
-						this.resetCells();
-					}
-					
-				}
-				
-			} else if (e.getSource() instanceof JToggleButton) {
-				
-				//Toggle the internal running variable
-				if (this.running) {
-					this.running = false;
-					this.gameRunner.cancel(true);
-					
-					this.gameRunner = new AntGameRunner(this);
-				} else {
-					this.running = true;
-					this.gameRunner.execute();
-				}
-				
-				
-			}
-
-		
-	}
-	
 	private void resetCells() {
 		for (ArrayList<CellCanvas> array : this.cells) {
 			for (CellCanvas cellCanvas : array) {
-				cellCanvas.setState(false);
+				cellCanvas.setState(CellCanvas.DEFAULT);
 				cellCanvas.removeAnt();
 				this.frameLabel.setText("Frame: 1");
 			}
@@ -234,5 +233,17 @@ public class GameInterface extends JFrame implements ActionListener{
 	public void step() {
 		this.gameRunner.step();
 		
+	}
+	
+	public void stopGame() {
+		this.running = false;
+		this.gameRunner.cancel(true);
+		this.buttonRun.setSelected(false);
+		this.gameRunner = new AntGameRunner(this);
+	}
+	
+	public void startGame() {
+		this.gameRunner.execute();
+		this.running = true;
 	}
 }

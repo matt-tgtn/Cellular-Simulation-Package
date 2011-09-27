@@ -15,10 +15,15 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
+import javax.swing.JTextField;
+import java.awt.Component;
+import javax.swing.Box;
+import net.miginfocom.swing.MigLayout;
 
 public class Launcher {
 
 	private JFrame frmCellularAutomata;
+	private JTextField txtConfiguration;
 
 	/**
 	 * Launch the application.
@@ -49,27 +54,23 @@ public class Launcher {
 	private void initialize() {
 		frmCellularAutomata = new JFrame();
 		frmCellularAutomata.setTitle("Cellular Automata");
-		frmCellularAutomata.setBounds(100, 100, 465, 424);
+		frmCellularAutomata.setBounds(100, 100, 540, 384);
 		frmCellularAutomata.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmCellularAutomata.getContentPane().setLayout(new BorderLayout(0, 0));
+		frmCellularAutomata.getContentPane().setLayout(new MigLayout("", "[500:540:550]", "[][grow,center][center][grow,center]"));
 		
 		JPanel panelTitle = new JPanel();
-		frmCellularAutomata.getContentPane().add(panelTitle, BorderLayout.NORTH);
+		frmCellularAutomata.getContentPane().add(panelTitle, "cell 0 0,growx,aligny top");
 		
 		JLabel lblSelectTheCellular = new JLabel("Select the cellular automata you wish to launch:");
 		lblSelectTheCellular.setFont(new Font("Calibri", Font.BOLD, 16));
 		panelTitle.add(lblSelectTheCellular);
 		
-		JPanel panelGames = new JPanel();
-		frmCellularAutomata.getContentPane().add(panelGames, BorderLayout.SOUTH);
-		panelGames.setLayout(new GridLayout(3, 1, 0, 0));
-		
 		JPanel panelGameLife = new JPanel();
+		frmCellularAutomata.getContentPane().add(panelGameLife, "cell 0 1,growx");
 		panelGameLife.setBorder(new TitledBorder(null, "Conwy's Game Of Life", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panelGames.add(panelGameLife);
 		panelGameLife.setLayout(new BorderLayout(0, 0));
 		
-		JLabel lblTheWellKnown = new JLabel("<HTML>The well known and most researched of all the cellula automata.</HTML>");
+		JLabel lblTheWellKnown = new JLabel("<HTML>The well known and most researched of all the cellula automata. In it, a simple set of rules <BR>define if a cell is born or dies each turn.</HTML>");
 		lblTheWellKnown.setFont(new Font("Arial", Font.PLAIN, 12));
 		lblTheWellKnown.setForeground(Color.DARK_GRAY);
 		panelGameLife.add(lblTheWellKnown, BorderLayout.NORTH);
@@ -89,33 +90,52 @@ public class Launcher {
 		panel_1.add(btnLaunch, BorderLayout.EAST);
 		
 		JPanel panelGameAnt = new JPanel();
+		frmCellularAutomata.getContentPane().add(panelGameAnt, "cell 0 2");
 		panelGameAnt.setBorder(new TitledBorder(null, "Langton's Ant", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panelGames.add(panelGameAnt);
 		panelGameAnt.setLayout(new BorderLayout(0, 0));
 		
-		JLabel lblInThisAutomata = new JLabel("<HTML> In this automata, Langton's Ant tracks around the grid turning left on black <BR> cells and right on white cells, flipping the colour as it goes.</HTML>\r\n");
+		JLabel lblInThisAutomata = new JLabel("<HTML> In this automata, Langton's Ant tracks around the grid following a set of rules. The configuration pane allows you to set when it turns left and right. See the tutorial for more.<BR> </HTML>\r\n");
 		lblInThisAutomata.setFont(new Font("Arial", Font.PLAIN, 12));
 		lblInThisAutomata.setForeground(Color.DARK_GRAY);
-		panelGameAnt.add(lblInThisAutomata, BorderLayout.NORTH);
+		panelGameAnt.add(lblInThisAutomata);
+		
+		JPanel panel_3 = new JPanel();
+		panelGameAnt.add(panel_3, BorderLayout.SOUTH);
+		panel_3.setLayout(new BorderLayout(0, 0));
+		
+		Component horizontalGlue = Box.createHorizontalGlue();
+		panel_3.add(horizontalGlue);
 		
 		JPanel panel_2 = new JPanel();
-		panelGameAnt.add(panel_2, BorderLayout.SOUTH);
-		panel_2.setLayout(new BorderLayout(0, 0));
+		panel_3.add(panel_2, BorderLayout.WEST);
 		
-		JButton btnLaunch_1 = new JButton("Launch");
-		btnLaunch_1.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				new org.matttitterington.cellautomata.LangtonsAnt.GameInterface("Langton's ant");
-				frmCellularAutomata.dispose();
-			}
-		});
-		btnLaunch_1.setHorizontalAlignment(SwingConstants.RIGHT);
-		panel_2.add(btnLaunch_1, BorderLayout.EAST);
+		JLabel lblConfiguration = new JLabel("Configuration:");
+		panel_2.add(lblConfiguration);
+		
+		txtConfiguration = new JTextField();
+		panel_2.add(txtConfiguration);
+		txtConfiguration.setHorizontalAlignment(SwingConstants.LEFT);
+		txtConfiguration.setText("RL");
+		txtConfiguration.setColumns(10);
+		
+		JPanel panel_4 = new JPanel();
+		panel_3.add(panel_4, BorderLayout.EAST);
+		
+		JButton button = new JButton("Small");
+		panel_4.add(button);
+		button.setHorizontalAlignment(SwingConstants.TRAILING);
+		
+		JButton button_1 = new JButton("Medium");
+		panel_4.add(button_1);
+		button_1.setHorizontalAlignment(SwingConstants.TRAILING);
+		
+		JButton button_2 = new JButton("Large");
+		panel_4.add(button_2);
+		button_2.setHorizontalAlignment(SwingConstants.TRAILING);
 		
 		JPanel panelGameWire = new JPanel();
+		frmCellularAutomata.getContentPane().add(panelGameWire, "cell 0 3");
 		panelGameWire.setBorder(new TitledBorder(null, "WireWorld", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panelGames.add(panelGameWire);
 		panelGameWire.setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel = new JPanel();
