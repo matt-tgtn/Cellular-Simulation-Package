@@ -144,7 +144,7 @@ public class Launcher {
 		button_1.setHorizontalAlignment(SwingConstants.TRAILING);
 		
 		JButton button_2 = new JButton("Large");
-		button_1.addMouseListener(new MouseAdapter() {
+		button_2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				new org.matttitterington.cellautomata.LangtonsAnt.GameInterface("Langton's Ant", 90, 90, txtConfiguration.getText());
