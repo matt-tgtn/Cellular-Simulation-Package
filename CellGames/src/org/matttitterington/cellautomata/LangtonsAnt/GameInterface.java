@@ -43,13 +43,26 @@ public class GameInterface extends JFrame{
 	public GameInterface(String title, int width, int height, String configuration) {
 		
 		//TODO implement error checking for the configuration
+		configuration = configuration.toUpperCase().replaceAll("[^RL]", "");
+		
+		System.out.println(configuration);
+		
+		boolean isLongEnough = configuration.length() > 1;
+		boolean containsR = configuration.contains("R");
+		boolean containsL = configuration.contains("L");
+		
+		if (isLongEnough && (containsL || containsR)) {
+			this.configuration = configuration;
+		} else {
+			this.configuration = "RL"; //Standard ant configuration
+		}
 		
 		
 		//SET GLOBAL PARAMETERS
 		this.cellArrayWidth = width;
 		this.cellArrayHeight = height;
 		this.fps = 60;
-		this.configuration = configuration; //Standard ant configuration
+		
 		
 		//instantiate variables
 		this.cells = new ArrayList<ArrayList<CellCanvas>>();
@@ -59,7 +72,7 @@ public class GameInterface extends JFrame{
 				
 		//Set swing  params
 		this.setTitle(title);
-		this.setSize(807,950);
+		this.setSize((cellArrayWidth*9)+(58)+(cellArrayWidth-1),(cellArrayHeight*9)+(40)+(cellArrayHeight + 150)); //HINT: 838x960
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		
@@ -136,7 +149,7 @@ public class GameInterface extends JFrame{
 					CellCanvas temp = new CellCanvas(this, configuration);
 			
 					temp.setState(CellCanvas.DEFAULT);
-					temp.setPreferredSize(new Dimension(15,15));
+					temp.setPreferredSize(new Dimension(9,9));
 					
 					panelGrid.add(temp);
 					this.cells.get(y).add(temp); //Add this cell to the array

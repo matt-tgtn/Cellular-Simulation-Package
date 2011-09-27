@@ -2,22 +2,22 @@ package org.matttitterington.cellautomata.Launcher;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
-import javax.swing.JTextField;
-import java.awt.Component;
-import javax.swing.Box;
+
 import net.miginfocom.swing.MigLayout;
 
 public class Launcher {
@@ -122,14 +122,35 @@ public class Launcher {
 		panel_3.add(panel_4, BorderLayout.EAST);
 		
 		JButton button = new JButton("Small");
+		button.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				new org.matttitterington.cellautomata.LangtonsAnt.GameInterface("Langton's Ant", 50, 50, txtConfiguration.getText());
+				frmCellularAutomata.dispose();
+			}
+		});
 		panel_4.add(button);
 		button.setHorizontalAlignment(SwingConstants.TRAILING);
 		
 		JButton button_1 = new JButton("Medium");
+		button_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				new org.matttitterington.cellautomata.LangtonsAnt.GameInterface("Langton's Ant", 75, 75, txtConfiguration.getText());
+				frmCellularAutomata.dispose();
+			}
+		});
 		panel_4.add(button_1);
 		button_1.setHorizontalAlignment(SwingConstants.TRAILING);
 		
 		JButton button_2 = new JButton("Large");
+		button_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				new org.matttitterington.cellautomata.LangtonsAnt.GameInterface("Langton's Ant", 90, 90, txtConfiguration.getText());
+				frmCellularAutomata.dispose();
+			}
+		});
 		panel_4.add(button_2);
 		button_2.setHorizontalAlignment(SwingConstants.TRAILING);
 		
