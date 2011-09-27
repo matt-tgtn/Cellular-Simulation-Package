@@ -166,13 +166,10 @@ public class GameInterface extends JFrame{
 			JPanel panelButton = new JPanel();
 		
 			buttonRun = new JToggleButton("Run");
-			buttonRun.addMouseListener(new MouseAdapter() {
+			buttonRun.addActionListener(new ActionListener() {
 				@Override
-				public void mouseClicked(MouseEvent arg0) {
-					//Will cancel the thread and clear cells if clicked when running
-					GameInterface i = GameInterface.this;
-					
-					if (i.running) {
+				public void actionPerformed(ActionEvent arg0) {
+					if (running) {
 						stopGame();
 						
 					} else {
