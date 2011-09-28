@@ -8,17 +8,16 @@ public class WireGameRunner extends SwingWorker<Void, Void>{
 	
 	GameInterface parent;
 	WireWorld currentWorld;
-	boolean actualRun;
 
-	public WireGameRunner(GameInterface gameInterface, boolean actualRun) {
+	public WireGameRunner(GameInterface gameInterface) {
 		this.parent = gameInterface;
 		this.currentWorld = new WireWorld(this.parent);
 		this.currentWorld.syncToInternal();
-		this.actualRun = actualRun;
+
 	}
 
 	public void step() {
-		parent.puzzleRunner.performActions(this.actualRun);
+		parent.puzzleRunner.performActions();
 		
 		currentWorld.syncToInternal();
 		

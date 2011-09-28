@@ -34,7 +34,6 @@ public class GameInterface extends JFrame{
 	//Objects
 	ArrayList<ArrayList<CellCanvas>> cells; //Will be used in the form .get(y).get(x)
 	WireGameRunner gameRunner;
-	JToggleButton buttonTestRun;
 	JToggleButton buttonRealRun;
 	PuzzleRunner puzzleRunner;
 	
@@ -44,7 +43,6 @@ public class GameInterface extends JFrame{
 	boolean running;
 	int fps;
 	boolean mouse1Down;
-	boolean realRun;
 	
 	int[] inputAPos;
 	int[] inputBPos;
@@ -61,7 +59,6 @@ public class GameInterface extends JFrame{
 		//instantiate variables
 		this.running = false;
 		this.mouse1Down = false;
-		this.realRun = false;
 		
 		//SET GLOBAL PARAMETERS
 		this.cellArrayWidth = width;
@@ -83,7 +80,7 @@ public class GameInterface extends JFrame{
 		
 		//Create objects
 		this.cells = new ArrayList<ArrayList<CellCanvas>>();
-		this.gameRunner = new WireGameRunner(this, false);
+		this.gameRunner = new WireGameRunner(this);
 		this.puzzleRunner = new PuzzleRunner(this, 1, this.inputAPos, this.inputBPos, this.outputPos);
 		
 		//Set swing  params
@@ -117,15 +114,13 @@ public class GameInterface extends JFrame{
 		final JRadioButtonMenuItem speed1 = new JRadioButtonMenuItem("6 FPS");
 		speed1.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent arg0) {
-				GameInterface i = GameInterface.this;
 				
 				fps = 6;
 
 				
 				if (running && speed1.isSelected()) {
-					gameRunner.cancel(true);
-					gameRunner = new WireGameRunner(i, realRun);
-					gameRunner.execute();
+					stopGame();
+					startGame();
 				} 
 			}
 		});
@@ -133,15 +128,13 @@ public class GameInterface extends JFrame{
 		final JRadioButtonMenuItem speed2 = new JRadioButtonMenuItem("15 FPS");
 		speed2.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent arg0) {
-				GameInterface i = GameInterface.this;
 				
 				fps = 15;
 
 				
 				if (running && speed2.isSelected()) {
-					gameRunner.cancel(true);
-					gameRunner = new WireGameRunner(i, realRun);
-					gameRunner.execute();
+					stopGame();
+					startGame();
 				} 
 			}
 		});
@@ -149,29 +142,25 @@ public class GameInterface extends JFrame{
 		final JRadioButtonMenuItem speed3 = new JRadioButtonMenuItem("30 FPS");
 		speed3.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent arg0) {
-				GameInterface i = GameInterface.this;
 				
 				fps = 30;
 
 				
 				if (running && speed3.isSelected()) {
-					gameRunner.cancel(true);
-					gameRunner = new WireGameRunner(i, realRun);
-					gameRunner.execute();
+					stopGame();
+					startGame();
 				} 
 			}
 		});
 		final JRadioButtonMenuItem speed4 = new JRadioButtonMenuItem("60 FPS");
 		speed4.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent arg0) {
-				GameInterface i = GameInterface.this;
 				
 				fps = 60;
 				
 				if (running && speed4.isSelected()) {
-					gameRunner.cancel(true);
-					gameRunner = new WireGameRunner(i, realRun);
-					gameRunner.execute();
+					stopGame();
+					startGame();
 				} 
 			}
 		});
@@ -203,8 +192,7 @@ public class GameInterface extends JFrame{
 		mntmLauncher.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new Launcher();
-				GameInterface i = GameInterface.this;
-				i.dispose();
+				GameInterface.this.dispose();
 			}
 		});
 		mnHelp.add(mntmLauncher);
@@ -272,36 +260,16 @@ public class GameInterface extends JFrame{
 		
 			JPanel panelButton = new JPanel();
 			panelButton.setBorder(new EmptyBorder(0, 10, 10, 5));
-		
-			buttonTestRun = new JToggleButton("Test Run");
-			buttonTestRun.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					
-					if (running && realRun) {
-						stopGame();
-						startGame(false);
-					} else if (!running) {
-						startGame(false);
-					} else if (running && !realRun) {
-						stopGame();
-					}
-				}
-
-			});
 			
 			buttonRealRun = new JToggleButton("Run");
-			buttonRealRun.addMouseListener(new MouseAdapter() {
+			buttonRealRun.addActionListener(new ActionListener() {
 				@Override
-				public void mouseClicked(MouseEvent e) {
+				public void actionPerformed(ActionEvent e) {
 					
-					if (running && realRun) {
+					if (running) {
 						stopGame();
-					} else if (!running) {
-						startGame(true);
-					} else if (running && !realRun) {
-						stopGame();
-						startGame(true);
+					} else {
+						startGame();
 					}
 				}
 
@@ -318,7 +286,6 @@ public class GameInterface extends JFrame{
 			});
 		
 			panelButton.add(buttonRealRun);
-			panelButton.add(buttonTestRun);
 			panelButton.add(buttonStep);
 			
 		
@@ -372,11 +339,11 @@ public class GameInterface extends JFrame{
 
 
 	public static void main(String [] args) {
-		new GameInterface("Wireworld", 80, 80);
+		new GameInterface("Wireworld", 30, 30);
 	}
 
 	
-	private void resetCells() {
+	void resetCells() {
 		for (ArrayList<CellCanvas> array : this.cells) {
 			for (CellCanvas cellCanvas : array) {
 				if (cellCanvas.isEditable()){
@@ -388,13 +355,39 @@ public class GameInterface extends JFrame{
 		}
 	}
 	
-	private void resetElectrons() {
+	void resetElectrons() {
 		for (ArrayList<CellCanvas> array : this.cells) {
 			for (CellCanvas cellCanvas : array) {
 				if ((cellCanvas.getState() == CellCanvas.HEAD)||(cellCanvas.getState() == CellCanvas.TAIL)) {
 					//This allows people to have the regular output from the input nodules when testing the game
 					this.puzzleRunner.newRun();
 					cellCanvas.setState(CellCanvas.WIRE);
+				}
+			}
+		}
+	}
+	
+	void resetElectrons(int numberToLeave) {
+		int headLeft = 0;
+		int tailLeft = 0;
+		for (ArrayList<CellCanvas> array : this.cells) {
+			for (CellCanvas cellCanvas : array) {
+				if (cellCanvas.getState() == CellCanvas.HEAD){
+					//If head cell and left enough already
+					if (headLeft == numberToLeave) {
+						cellCanvas.setState(CellCanvas.WIRE);
+					} else {
+						headLeft += 1;
+					}
+				}
+				
+				if (cellCanvas.getState() == CellCanvas.TAIL){
+					//If tail cell and left enough already
+					if (tailLeft == numberToLeave) {
+						cellCanvas.setState(CellCanvas.WIRE);
+					} else {
+						tailLeft += 1;
+					}
 				}
 			}
 		}
@@ -407,25 +400,17 @@ public class GameInterface extends JFrame{
 	public void stopGame() {
 		running = false;
 		gameRunner.cancel(true);
-		gameRunner = new WireGameRunner(this, realRun);
+		gameRunner = new WireGameRunner(this);
 		
-		System.out.println(realRun);
+
 		
-		if (realRun) {
-			buttonRealRun.setSelected(false);
-		} else {
-			buttonTestRun.setSelected(false);
-		}
+		
+		buttonRealRun.setSelected(false);
+		
 	}
 	
-	public void startGame(boolean real) {
+	public void startGame() {
 		running = true;
-		realRun = real;
-		
-		//Make sure that you can't cheat in a real run of the game
-		if (realRun) {
-			this.resetElectrons();
-		}
 		
 		gameRunner.execute();
 	}
