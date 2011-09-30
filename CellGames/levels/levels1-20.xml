@@ -61,7 +61,7 @@
 		
 		<levelSummary>A ^ B > X</levelSummary>
 		<levelDescription>Find the result of A AND B.</levelDescription>
-		<levelHint></levelHint>
+		<levelHint>Getting harder this time. Think how gates can be combined to simulate other gates.</levelHint>
 		<password>tooeasy</password>
 	</level>
 	
@@ -78,14 +78,14 @@
 	</level>
 	
 	<level id="6">
-		<inputA>0110</inputA>
-		<inputB>0011</inputB>
-		<output>1000</output>
-		<electrons>0</electrons>
+		<inputA>10110010</inputA>
+		<inputB>10011010</inputB>
+		<output>1000101</output>
+		<electrons>1</electrons>
 		
 		<levelSummary>¬ (A ^ B) > X</levelSummary>
 		<levelDescription>Find A NOR B.</levelDescription>
-		<levelHint></levelHint>
+		<levelHint>Pretty hard one. We really need the NOT gate to not output until we're ready to go. How about trying some delay tactics.</levelHint>
 		<password>levelseven</password>
 	</level>
 	
@@ -93,7 +93,7 @@
 		<inputA>1100</inputA>
 		<inputB>1010</inputB>
 		<output>1001</output>
-		<electrons>0</electrons>
+		<electrons>1</electrons>
 		
 		<levelSummary>¬ (A XOR B) > X</levelSummary>
 		<levelDescription>Lets make it more complicated! Find NOT (A XOR B).</levelDescription>

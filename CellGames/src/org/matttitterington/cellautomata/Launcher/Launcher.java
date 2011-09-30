@@ -19,6 +19,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
 import net.miginfocom.swing.MigLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Launcher {
 
@@ -54,9 +56,9 @@ public class Launcher {
 	private void initialize() {
 		frmCellularAutomata = new JFrame();
 		frmCellularAutomata.setTitle("Cellular Automata");
-		frmCellularAutomata.setBounds(100, 100, 540, 384);
+		frmCellularAutomata.setBounds(100, 100, 542, 484);
 		frmCellularAutomata.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmCellularAutomata.getContentPane().setLayout(new MigLayout("", "[500:540:550]", "[][grow,center][center][grow,center]"));
+		frmCellularAutomata.getContentPane().setLayout(new MigLayout("", "[500:540:550,grow]", "[][grow,center][center][grow,center][grow]"));
 		
 		JPanel panelTitle = new JPanel();
 		frmCellularAutomata.getContentPane().add(panelTitle, "cell 0 0,growx,aligny top");
@@ -197,6 +199,46 @@ public class Launcher {
 		lblATuringcompleteAutomata.setFont(new Font("Arial", Font.PLAIN, 12));
 		lblATuringcompleteAutomata.setForeground(Color.DARK_GRAY);
 		panelGameWire.add(lblATuringcompleteAutomata, BorderLayout.NORTH);
+		
+		JPanel panelPuzzleGame = new JPanel();
+		panelPuzzleGame.setBorder(new TitledBorder(null, "WireWorld Puzzle Game", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		frmCellularAutomata.getContentPane().add(panelPuzzleGame, "cell 0 4,growx");
+		panelPuzzleGame.setLayout(new BorderLayout(0, 0));
+		
+		JLabel lblThisIsA = new JLabel("<HTML> This is a puzzle and logic game based off of wireworld. Take the two input streams and use <BR> your logical thinking to combine the data and create the correct output. </HTML>");
+		lblThisIsA.setFont(new Font("Arial", Font.PLAIN, 12));
+		lblThisIsA.setForeground(Color.DARK_GRAY);
+		panelPuzzleGame.add(lblThisIsA, BorderLayout.NORTH);
+		
+		JPanel panel_5 = new JPanel();
+		panelPuzzleGame.add(panel_5, BorderLayout.EAST);
+		
+		JButton btnSmall_1 = new JButton("Small");
+		btnSmall_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new org.matttitterington.cellautomata.WireworldPuzzleGame.GameInterface("Wireworld puzzle game", 50, 50);
+				frmCellularAutomata.dispose();
+			}
+		});
+		panel_5.add(btnSmall_1);
+		
+		JButton btnMedium_1 = new JButton("Medium");
+		btnMedium_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new org.matttitterington.cellautomata.WireworldPuzzleGame.GameInterface("Wireworld puzzle game", 75, 75);
+				frmCellularAutomata.dispose();
+			}
+		});
+		panel_5.add(btnMedium_1);
+		
+		JButton btnLarge_1 = new JButton("Large");
+		btnLarge_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new org.matttitterington.cellautomata.WireworldPuzzleGame.GameInterface("Wireworld puzzle game", 90, 90);
+				frmCellularAutomata.dispose();
+			}
+		});
+		panel_5.add(btnLarge_1);
 	}
 
 }

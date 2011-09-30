@@ -131,6 +131,11 @@ public class PuzzleRunner {
 					
 					if (expected != outputArray[i]) {
 						victory = false;
+						
+						System.out.println("Expected " + expected
+								+ "at position " + i + ". Got "
+								+ outputArray[i]);
+						
 						break;
 					}
 					
