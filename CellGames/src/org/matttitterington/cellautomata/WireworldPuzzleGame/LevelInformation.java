@@ -22,7 +22,7 @@ import javax.swing.border.EmptyBorder;
 import net.miginfocom.swing.MigLayout;
 
 @SuppressWarnings("serial")
-public class LevelInformation extends JDialog {
+public class LevelInformation extends JFrame {
 
 	private final JPanel contentPanel = new JPanel();
 	private Level level;
@@ -33,7 +33,7 @@ public class LevelInformation extends JDialog {
 	 */
 	public LevelInformation(Level level, GameInterface parent) {
 		
-		super(parent, true);
+		//super(parent, true);
 		
 		this.level = level;
 		
