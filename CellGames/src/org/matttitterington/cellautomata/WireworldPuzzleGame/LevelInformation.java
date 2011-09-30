@@ -135,6 +135,15 @@ public class LevelInformation extends JDialog {
 				cancelButton.setActionCommand("Hint\r\n");
 				buttonPane.add(cancelButton);
 			}
+			{
+				JButton btnTutorial = new JButton("Tutorial");
+				btnTutorial.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						OpenBrowser.openURL(getClass().getResource("/tutorial/tutorial.html").toString());
+					}
+				});
+				buttonPane.add(btnTutorial);
+			}
 		}
 	}
 

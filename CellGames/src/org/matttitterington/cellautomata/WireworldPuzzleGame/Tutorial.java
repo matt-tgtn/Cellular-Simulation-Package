@@ -139,8 +139,7 @@ public class Tutorial {
 		JButton btnIndepthTutorial = new JButton("In-depth tutorial");
 		btnIndepthTutorial.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println(getClass().getResource("tutorial/tutorial.html").toString());
-				OpenBrowser.openURL(getClass().getResource("tutorial/tutorial.html").toString());
+				OpenBrowser.openURL(getClass().getResource("/tutorial/tutorial.html").toString());
 			}
 		});
 		BasicsMainContainer.add(btnIndepthTutorial, "cell 1 4");
