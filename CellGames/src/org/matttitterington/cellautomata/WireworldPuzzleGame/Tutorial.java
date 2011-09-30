@@ -15,6 +15,9 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
 import net.miginfocom.swing.MigLayout;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Tutorial {
 
@@ -131,7 +134,16 @@ public class Tutorial {
 		JTextPane txtpnSeeTheAbout = new JTextPane();
 		txtpnSeeTheAbout.setBackground(SystemColor.control);
 		txtpnSeeTheAbout.setText("See the about menu for links to resources including logic gates and more complicated structures.");
-		BasicsMainContainer.add(txtpnSeeTheAbout, "cell 1 4,grow");
+		BasicsMainContainer.add(txtpnSeeTheAbout, "flowy,cell 1 4,grow");
+		
+		JButton btnIndepthTutorial = new JButton("In-depth tutorial");
+		btnIndepthTutorial.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.out.println(getClass().getResource("tutorial/tutorial.html").toString());
+				OpenBrowser.openURL(getClass().getResource("tutorial/tutorial.html").toString());
+			}
+		});
+		BasicsMainContainer.add(btnIndepthTutorial, "cell 1 4");
 		
 		JLabel lblBasicTutorial = new JLabel("Basic tutorial.");
 		lblBasicTutorial.setFont(new Font("Tahoma", Font.BOLD, 14));
