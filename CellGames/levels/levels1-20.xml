@@ -105,7 +105,7 @@
 		<inputA>10110</inputA>
 		<inputB>00000</inputB>
 		<output>11001</output>
-		<electrons>0</electrons>
+		<electrons>1</electrons>
 		
 		<levelSummary>¬A (L)> X</levelSummary>
 		<levelDescription>Find NOT(A). This time, however, a leading pulse will be sent to identify the beginning of the stream. Leave this pulse intact (DO NOT CHANGE IT).</levelDescription>
@@ -113,4 +113,63 @@
 		<password>goodjobnewbie</password>
 	</level>
 
+	<level id="9">
+		<inputA>10110</inputA>
+		<inputB>01101</inputB>
+		<output>1100001</output>
+		<electrons>0</electrons>
+		
+		<levelSummary>A + B > X</levelSummary>
+		<levelDescription>Add the value of A and B together.</levelDescription>
+		<levelHint></levelHint>
+		<password>haveabanana</password>
+	</level>
+	
+	<level id="10">
+		<inputA>101100101</inputA>
+		<inputB>0</inputB>
+		<output>111100111</output>
+		<electrons>0</electrons>
+		
+		<levelSummary>101 > 111</levelSummary>
+		<levelDescription>Find instances of 101 in the input from A and replace it with 111.</levelDescription>
+		<levelHint></levelHint>
+		<password>idontlikegaps</password>
+	</level>
+	
+	<level id="11">
+		<inputA>10000000</inputA>
+		<inputB>00000001</inputB>
+		<output>11111111</output>
+		<electrons>1</electrons>
+		
+		<levelSummary></levelSummary>
+		<levelDescription>There will be a start impulse from A. At that point, output electrons continuously until the end impulse is received from B. Both impulses from A and B must reach the output node.</levelDescription>
+		<levelHint></levelHint>
+		<password>11111111</password>
+	</level>
+	
+	<level id="12">
+		<inputA>10000000</inputA>
+		<inputB>00000001</inputB>
+		<output>11011011</output>
+		<electrons>1</electrons>
+		
+		<levelSummary></levelSummary>
+		<levelDescription>There will be a start impulse from A. At that point, output the configuration '101' continuously until the end impulse is received from B. Both impulses from A and B must reach the output node.</levelDescription>
+		<levelHint></levelHint>
+		<password>thinkjazz</password>
+	</level>
+	
+	<level id="13">
+		<inputA>1011</inputA>
+		<inputB>1101</inputB>
+		<output>1</output>
+		<electrons>1</electrons>
+		
+		<levelSummary>(A > B) > X</levelSummary>
+		<levelDescription>Find which is greater, A or B. If A is greater than B, output 1. Else, output 0.</levelDescription>
+		<levelHint></levelHint>
+		<password>me>you</password>
+	</level>
 </levels>

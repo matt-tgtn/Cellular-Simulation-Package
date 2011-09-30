@@ -19,8 +19,6 @@ import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
 import net.miginfocom.swing.MigLayout;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class Launcher {
 
