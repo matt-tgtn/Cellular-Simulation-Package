@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE WIRELEVEL [
+
+<!ELEMENT LEVELS (LEVEL+)>
+<!ELEMENT LEVEL (INPUTA, INPUTB, OUTPUT, ELECTRONS, LEVELSUMMARY, LEVELDESCRIPTION, LEVELHINT, password)>
+<!ELEMENT INPUTA (#PCDATA)>
+<!ELEMENT INPUTB (#PCDATA)>
+<!ELEMENT OUTPUT (#PCDATA)>
+<!ELEMENT ELECTRONS (#PCDATA)>
+<!ELEMENT LEVELSUMMARY (#PCDATA)>
+<!ELEMENT LEVELDESCRIPTION (#PCDATA)>
+<!ELEMENT LEVELHINT (#PCDATA)>
+<!ELEMENT PASSWORD (#PCDATA)>
+
+<!ATTLIST LEVEL ID ID #REQUIRED>
+]>
+
+<levels>
+	<level id="1">
+		<inputA>1011</inputA>
+		<inputB>0000</inputB>
+		<output>1011</output>
+		<electrons>0</electrons>
+		
+		<levelSummary>A > X</levelSummary>
+		<levelDescription>In this first level, route all input from A to the output node</levelDescription>
+		<levelHint>Draw a straight line of wire from  A to output</levelHint>
+		<password></password>
+	</level>
+	
+	<level id="2">
+		<inputA>1010</inputA>
+		<inputB>0101</inputB>
+		<output>1111</output>
+		<electrons>0</electrons>
+		
+		<levelSummary>A XOR B > X</levelSummary>
+		<levelDescription>Here, input will come from A and B, but not at the same time. Route it all to the output node.</levelDescription>
+		<levelHint>Connect A and B in the middle. Try to think of a way to prevent the electrons running back down the opposite input line.</levelHint>
+		<password>basics</password>
+	</level>
+	
+	<level id="3">
+		<inputA>1100</inputA>
+		<inputB>1010</inputB>
+		<output>1110</output>
+		<electrons>0</electrons>
+		
+		<levelSummary>A v B > X</levelSummary>
+		<levelDescription>Logical time! Take inputs A and B, apply the OR operand and route the output to X.</levelDescription>
+		<levelHint>Think of a plus.</levelHint>
+		<password>wiretastic</password>
+	</level>
+	
+	<level id="4">
+		<inputA>1100101</inputA>
+		<inputB>1010111</inputB>
+		<output>1000101</output>
+		<electrons>0</electrons>
+		
+		<levelSummary>A ^ B > X</levelSummary>
+		<levelDescription>Find the result of A AND B.</levelDescription>
+		<levelHint></levelHint>
+		<password>tooeasy</password>
+	</level>
+	
+	<level id="5">
+		<inputA>1100</inputA>
+		<inputB>0110</inputB>
+		<output>1011</output>
+		<electrons>1</electrons>
+		
+		<levelSummary>¬ (A v B) > X</levelSummary>
+		<levelDescription>Find the result of NOT(A AND B).</levelDescription>
+		<levelHint>You may need to leave electrons on the field this time.</levelHint>
+		<password>gettingharder</password>
+	</level>
+	
+	<level id="6">
+		<inputA>0110</inputA>
+		<inputB>0011</inputB>
+		<output>1000</output>
+		<electrons>0</electrons>
+		
+		<levelSummary>¬ (A ^ B) > X</levelSummary>
+		<levelDescription>Find A NOR B.</levelDescription>
+		<levelHint></levelHint>
+		<password>levelseven</password>
+	</level>
+	
+	<level id="7">
+		<inputA>1100</inputA>
+		<inputB>1010</inputB>
+		<output>1001</output>
+		<electrons>0</electrons>
+		
+		<levelSummary>¬ (A XOR B) > X</levelSummary>
+		<levelDescription>Lets make it more complicated! Find NOT (A XOR B).</levelDescription>
+		<levelHint></levelHint>
+		<password>thesituationhaschanged</password>
+	</level>
+	
+	<level id="8">
+		<inputA>10110</inputA>
+		<inputB>00000</inputB>
+		<output>11001</output>
+		<electrons>0</electrons>
+		
+		<levelSummary>¬A (L)> X</levelSummary>
+		<levelDescription>Find NOT(A). This time, however, a leading pulse will be sent to identify the beginning of the stream. Leave this pulse intact (DO NOT CHANGE IT).</levelDescription>
+		<levelHint></levelHint>
+		<password>goodjobnewbie</password>
+	</level>
+
+</levels>

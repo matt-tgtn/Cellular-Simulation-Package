@@ -81,7 +81,7 @@ public class GameInterface extends JFrame{
 		//Create objects
 		this.cells = new ArrayList<ArrayList<CellCanvas>>();
 		this.gameRunner = new WireGameRunner(this);
-		this.puzzleRunner = new PuzzleRunner(this, 1, this.inputAPos, this.inputBPos, this.outputPos);
+		
 		
 		//Set swing  params
 		this.setTitle(title);
@@ -95,9 +95,10 @@ public class GameInterface extends JFrame{
 		//Run the interface builder in a safe thread
 		
 		initialiseInterface();
-		
-		
 		this.setVisible(true);
+		
+		//So the interface displays before the level dialog
+		this.puzzleRunner = new PuzzleRunner(this, 1, this.inputAPos, this.inputBPos, this.outputPos);
 		
 	}
 	
@@ -164,6 +165,25 @@ public class GameInterface extends JFrame{
 				} 
 			}
 		});
+		
+		JMenu mnGame = new JMenu("Game");
+		menuBar.add(mnGame);
+		
+		JMenuItem mntmEnterPassword = new JMenuItem("Enter password");
+		mntmEnterPassword.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new PasswordEntryDialog(GameInterface.this);
+			}
+		});
+		
+		JMenuItem mntmShowObjectives = new JMenuItem("Show objectives");
+		mntmShowObjectives.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new LevelInformation(puzzleRunner.currentLevel, GameInterface.this);
+			}
+		});
+		mnGame.add(mntmShowObjectives);
+		mnGame.add(mntmEnterPassword);
 		
 		group.add(speed1);
 		menuSpeed.add(speed1);
@@ -339,7 +359,7 @@ public class GameInterface extends JFrame{
 
 
 	public static void main(String [] args) {
-		new GameInterface("Wireworld", 30, 30);
+		new GameInterface("Wireworld", 50, 50);
 	}
 
 	

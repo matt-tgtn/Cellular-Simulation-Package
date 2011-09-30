@@ -3,8 +3,8 @@ package org.matttitterington.cellautomata.WireworldPuzzleGame;
 public class PuzzleRunner {
 
 	GameInterface parent;
-	int level;
 	int frame;
+	int level;
 	
 	//Statics
 	static final int NOTHEAD = 2;
@@ -16,12 +16,8 @@ public class PuzzleRunner {
 	int[] outputPos;
 	
 	//Level variables
-	String inputA;
-	String inputB;
-	String expectedOutput;
-	String levelDescription;
-	String levelHint;
-	int electronAllowance;
+	Level currentLevel;
+	LevelParser levelParser;
 	
 	//Dynamic vars
 	int firstOutput;
@@ -33,44 +29,23 @@ public class PuzzleRunner {
 		this.inputBPos = inputBPos;
 		this.outputPos = outputPos;
 		
+		this.levelParser = new LevelParser();
+		
 		this.parent = gameInterface;
-		this.setLevel(1);
+		this.setLevel(level);
 		this.newRun();
 	}
 
-	private void setLevel(int level) {
-		//TODO add capabilities for real levels
+	void setLevel(int level) {
 		
 		this.level = level;
 		
-		if (level == 1) {
-			inputA = "1011";
-			inputB = "0000";
-			expectedOutput = "1011";
-			electronAllowance = 0;
-			
-			levelDescription = "In this first level, route all input from A to the output node";
-			levelHint = "Draw a straight line of wire from  A to output";
-			
-		} else if (level == 2) {
-			inputA = "1010";
-			inputB = "0101";
-			expectedOutput = "1111";
-			electronAllowance = 0;
-			
-			levelDescription = "Here, input will come from A and B, but not at the same time. Route it all to the output node.";
-			levelHint = "Connect A and B in the middle. Try to think of a way to prevent the electrons running back down the opposite input line.";
-		} else {
-			setLevel(1);
-		}
+		this.currentLevel = this.levelParser.getLevel(level);
+		
 		
 		this.newRun();
 		
-		if (level == 1) {
-			displayLevelInformation(false);
-		} else {
-			displayLevelInformation(true);
-		}
+		displayLevelInformation();
 		
 		
 		
@@ -84,18 +59,18 @@ public class PuzzleRunner {
 			//We may be due to emit an electron
 			
 			//Check for NullPointerException
-			if (frame/6 < inputA.length()) {
+			if (frame/6 < currentLevel.inputA.length()) {
 				//Check if one needs to go out on A
-				if (inputA.charAt(frame/6) == "1".charAt(0)) {
+				if (currentLevel.inputA.charAt(frame/6) == "1".charAt(0)) {
 					this.parent.cells.get(inputAPos[1]).get(inputAPos[0]).setState(CellCanvas.HEAD);
 				}
 			
 			}
 			
 			//NullPointer on B
-			if (frame/6 < inputB.length()) {
+			if (frame/6 < currentLevel.inputB.length()) {
 				//Check if one needs to go out on B
-				if (inputB.charAt(frame/6) == "1".charAt(0)) {
+				if (currentLevel.inputB.charAt(frame/6) == "1".charAt(0)) {
 					this.parent.cells.get(inputBPos[1]).get(inputBPos[0]).setState(CellCanvas.HEAD);
 				}
 			
@@ -133,7 +108,7 @@ public class PuzzleRunner {
 		} else {
 			System.out.println("First output recieved");
 			
-			sufficientTimePassed = ((expectedOutput.length()-1)*6)+1 < (frame-firstOutput);
+			sufficientTimePassed = ((currentLevel.getExpectedOutput().length()-1)*6)+1 < (frame-firstOutput);
 		}
 
 		//If so, check for victory
@@ -148,7 +123,7 @@ public class PuzzleRunner {
 					
 					int expected;
 					
-					if (expectedOutput.charAt(i/6) == "1".charAt(0)) {
+					if (currentLevel.getExpectedOutput().charAt(i/6) == "1".charAt(0)) {
 						expected = PuzzleRunner.HEAD;
 					} else {
 						expected = PuzzleRunner.NOTHEAD;
@@ -199,15 +174,14 @@ public class PuzzleRunner {
 	public void newRun() {
 		this.frame = 0;
 		this.firstOutput = 0;
-		this.outputArray = new int[(this.expectedOutput.length()*6)];
-		this.parent.resetElectrons(this.electronAllowance);
+		this.outputArray = new int[(this.currentLevel.expectedOutput.length()*6)];
+		this.parent.resetElectrons(this.currentLevel.electronAllowance);
 		
 	}
 	
-	private void displayLevelInformation(boolean completedPrevious) {
-		//new LevelInformation(this.level, this.levelDescription, this.levelHint, completedPrevious);
+	private void displayLevelInformation() {
+		new LevelInformation(currentLevel, parent);
 		
-		System.out.println(level);
 		
 	}
 	
