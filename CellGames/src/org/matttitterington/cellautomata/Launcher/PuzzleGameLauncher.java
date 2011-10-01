@@ -76,8 +76,8 @@ public class PuzzleGameLauncher {
 		btnSmall.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new org.matttitterington.cellautomata.Wireworld.GameInterface("Wireworld", 50,50);
 				frmCellularAutomata.dispose();
+				new org.matttitterington.cellautomata.Wireworld.GameInterface("Wireworld", 50,50);
 			}
 		});
 		panel.add(btnSmall);
@@ -86,8 +86,9 @@ public class PuzzleGameLauncher {
 		btnMedium.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new org.matttitterington.cellautomata.Wireworld.GameInterface("Wireworld", 75,75);
 				frmCellularAutomata.dispose();
+				new org.matttitterington.cellautomata.Wireworld.GameInterface("Wireworld", 75,75);
+				
 			}
 		});
 		panel.add(btnMedium);
@@ -96,8 +97,8 @@ public class PuzzleGameLauncher {
 		btnLarge.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new org.matttitterington.cellautomata.Wireworld.GameInterface("Wireworld", 90,90);
 				frmCellularAutomata.dispose();
+				new org.matttitterington.cellautomata.Wireworld.GameInterface("Wireworld", 90,90);
 			}
 		});
 		panel.add(btnLarge);
@@ -123,8 +124,8 @@ public class PuzzleGameLauncher {
 		JButton btnSmall_1 = new JButton("Small");
 		btnSmall_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new org.matttitterington.cellautomata.WireworldPuzzleGame.GameInterface("Wireworld puzzle game", 50, 50);
 				frmCellularAutomata.dispose();
+				new org.matttitterington.cellautomata.WireworldPuzzleGame.GameInterface("Wireworld puzzle game", 50, 50);
 			}
 		});
 		panel_5.add(btnSmall_1);
@@ -132,8 +133,8 @@ public class PuzzleGameLauncher {
 		JButton btnMedium_1 = new JButton("Medium");
 		btnMedium_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new org.matttitterington.cellautomata.WireworldPuzzleGame.GameInterface("Wireworld puzzle game", 75, 75);
 				frmCellularAutomata.dispose();
+				new org.matttitterington.cellautomata.WireworldPuzzleGame.GameInterface("Wireworld puzzle game", 75, 75);
 			}
 		});
 		panel_5.add(btnMedium_1);
@@ -141,8 +142,8 @@ public class PuzzleGameLauncher {
 		JButton btnLarge_1 = new JButton("Large");
 		btnLarge_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new org.matttitterington.cellautomata.WireworldPuzzleGame.GameInterface("Wireworld puzzle game", 90, 90);
 				frmCellularAutomata.dispose();
+				new org.matttitterington.cellautomata.WireworldPuzzleGame.GameInterface("Wireworld puzzle game", 90, 90);
 			}
 		});
 		panel_5.add(btnLarge_1);

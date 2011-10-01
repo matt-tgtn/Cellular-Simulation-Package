@@ -26,7 +26,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import org.matttitterington.cellautomata.Launcher.Launcher;
+import org.matttitterington.cellautomata.Launcher.PuzzleGameLauncher;
 
 @SuppressWarnings("serial")
 public class GameInterface extends JFrame{
@@ -211,7 +211,7 @@ public class GameInterface extends JFrame{
 		JMenuItem mntmLauncher = new JMenuItem("Launcher");
 		mntmLauncher.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new Launcher();
+				new PuzzleGameLauncher();
 				GameInterface.this.dispose();
 			}
 		});
