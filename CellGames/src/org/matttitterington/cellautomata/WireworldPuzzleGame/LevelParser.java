@@ -31,7 +31,7 @@ public class LevelParser extends DefaultHandler{
 			SAXParser sp = spf.newSAXParser();
 			
 			//Make sure we parse the correct level data file
-			sp.parse(source, this);
+			sp.parse(getClass().getResourceAsStream(source), this);
 			
 			
 		} catch (SAXException e) {
@@ -100,7 +100,7 @@ public class LevelParser extends DefaultHandler{
 		if (myLevels.isEmpty()) {
 			//Parse the document containing the correct number of levels
 			if ((requestedLevel > 0)&&(requestedLevel <= 20)) {
-				this.parseLevels("levels/levels1-20.xml");
+				this.parseLevels("/levels/levels1-20.xml");
 			}
 		}
 		

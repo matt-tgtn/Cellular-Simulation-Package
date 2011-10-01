@@ -22,7 +22,7 @@ import javax.swing.border.EmptyBorder;
 import net.miginfocom.swing.MigLayout;
 
 @SuppressWarnings("serial")
-public class LevelInformation extends JFrame {
+public class LevelInformation extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private Level level;
@@ -33,7 +33,7 @@ public class LevelInformation extends JFrame {
 	 */
 	public LevelInformation(Level level, GameInterface parent) {
 		
-		//super(parent, true);
+		super(parent, true);
 		
 		this.level = level;
 		
@@ -139,7 +139,7 @@ public class LevelInformation extends JFrame {
 				JButton btnTutorial = new JButton("Tutorial");
 				btnTutorial.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
-						OpenBrowser.openURL(getClass().getResource("/tutorial/tutorial.html").toString());
+						new TutorialManager();
 					}
 				});
 				buttonPane.add(btnTutorial);
