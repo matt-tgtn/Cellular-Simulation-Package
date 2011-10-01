@@ -18,6 +18,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JToggleButton;
@@ -323,11 +324,12 @@ public class GameInterface extends JFrame{
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				
-				if (running) {
+				int optionPane = JOptionPane.showConfirmDialog(new JFrame(), "Are you sure you want to clear all the cells?","Clear All", JOptionPane.YES_NO_OPTION);
+				
+				if (running && optionPane == JOptionPane.YES_OPTION) {
 					stopGame();
-					
 					resetCells();
-				} else {
+				} else if (optionPane == JOptionPane.YES_OPTION){
 					resetCells();
 				}
 			}

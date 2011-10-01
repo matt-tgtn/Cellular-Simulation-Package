@@ -167,7 +167,7 @@ public class Launcher {
 		btnSmall.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new org.matttitterington.cellautomata.Wireworld.GameInterface("Wireworld", 50,50);
+				new org.matttitterington.cellautomata.Wireworld.GameInterface("Wireworld", 50,50,false);
 				frmCellularAutomata.dispose();
 			}
 		});
@@ -177,7 +177,7 @@ public class Launcher {
 		btnMedium.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new org.matttitterington.cellautomata.Wireworld.GameInterface("Wireworld", 75,75);
+				new org.matttitterington.cellautomata.Wireworld.GameInterface("Wireworld", 75,75, false);
 				frmCellularAutomata.dispose();
 			}
 		});
@@ -187,7 +187,7 @@ public class Launcher {
 		btnLarge.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new org.matttitterington.cellautomata.Wireworld.GameInterface("Wireworld", 90,90);
+				new org.matttitterington.cellautomata.Wireworld.GameInterface("Wireworld", 90,90, false);
 				frmCellularAutomata.dispose();
 			}
 		});

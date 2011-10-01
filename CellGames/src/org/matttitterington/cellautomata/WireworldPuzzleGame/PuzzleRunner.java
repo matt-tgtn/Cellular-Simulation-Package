@@ -1,5 +1,8 @@
 package org.matttitterington.cellautomata.WireworldPuzzleGame;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 public class PuzzleRunner {
 
 	GameInterface parent;
@@ -169,9 +172,9 @@ public class PuzzleRunner {
 			this.setLevel(this.level + 1);
 		}
 		else {
-			System.out.println("Failure!");
+			JOptionPane.showMessageDialog(parent.getContentPane(), "You failed. Try again." ,"Failure", JFrame.DISPOSE_ON_CLOSE);
 			parent.resetElectrons();
-			//TODO show fail dialogue
+			this.newRun();
 		}
 		
 	}

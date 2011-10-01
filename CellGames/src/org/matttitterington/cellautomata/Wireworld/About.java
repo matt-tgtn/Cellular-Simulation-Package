@@ -47,7 +47,7 @@ public class About {
 		frmAbout = new JFrame();
 		frmAbout.setTitle("About");
 		frmAbout.setBounds(100, 100, 540, 204);
-		frmAbout.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmAbout.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmAbout.getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel = new JPanel();

@@ -27,6 +27,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import org.matttitterington.cellautomata.Launcher.Launcher;
+import org.matttitterington.cellautomata.Launcher.PuzzleGameLauncher;
 
 @SuppressWarnings("serial")
 public class GameInterface extends JFrame{
@@ -39,10 +40,11 @@ public class GameInterface extends JFrame{
 	JToggleButton buttonRun;
 	int fps;
 	boolean mouse1Down;
+	boolean puzzleLauncher;
 
 	
 	
-	public GameInterface(String title, int width, int height) {
+	public GameInterface(String title, int width, int height, boolean puzzleLauncher) {
 		
 		
 		//instantiate variables
@@ -50,6 +52,7 @@ public class GameInterface extends JFrame{
 		this.running = false;
 		this.gameRunner = new WireGameRunner(this);
 		this.mouse1Down = false;
+		this.puzzleLauncher = puzzleLauncher;
 		
 		//SET GLOBAL PARAMETERS
 		this.cellArrayWidth = width;
@@ -172,9 +175,13 @@ public class GameInterface extends JFrame{
 		JMenuItem mntmLauncher = new JMenuItem("Launcher");
 		mntmLauncher.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new Launcher();
-				GameInterface i = GameInterface.this;
-				i.dispose();
+				GameInterface.this.dispose();
+				
+				if (puzzleLauncher) {
+					new PuzzleGameLauncher();
+				} else {
+					new Launcher();
+				}
 			}
 		});
 		mnHelp.add(mntmLauncher);
@@ -314,7 +321,7 @@ public class GameInterface extends JFrame{
 
 
 	public static void main(String [] args) {
-		new GameInterface("Wireworld", 80, 80);
+		new GameInterface("Wireworld", 80, 80, false);
 	}
 
 	

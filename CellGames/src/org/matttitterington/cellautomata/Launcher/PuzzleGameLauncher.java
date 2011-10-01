@@ -77,7 +77,7 @@ public class PuzzleGameLauncher {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				frmCellularAutomata.dispose();
-				new org.matttitterington.cellautomata.Wireworld.GameInterface("Wireworld", 50,50);
+				new org.matttitterington.cellautomata.Wireworld.GameInterface("Wireworld", 50,50, true);
 			}
 		});
 		panel.add(btnSmall);
@@ -87,7 +87,7 @@ public class PuzzleGameLauncher {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				frmCellularAutomata.dispose();
-				new org.matttitterington.cellautomata.Wireworld.GameInterface("Wireworld", 75,75);
+				new org.matttitterington.cellautomata.Wireworld.GameInterface("Wireworld", 75,75, true);
 				
 			}
 		});
@@ -98,7 +98,7 @@ public class PuzzleGameLauncher {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				frmCellularAutomata.dispose();
-				new org.matttitterington.cellautomata.Wireworld.GameInterface("Wireworld", 90,90);
+				new org.matttitterington.cellautomata.Wireworld.GameInterface("Wireworld", 90,90, true);
 			}
 		});
 		panel.add(btnLarge);
