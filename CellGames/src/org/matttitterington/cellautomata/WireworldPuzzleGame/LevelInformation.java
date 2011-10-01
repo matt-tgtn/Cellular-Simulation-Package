@@ -110,7 +110,15 @@ public class LevelInformation extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5));
 			{
-				JLabel lblPressAnyKey = new JLabel("Press enter to continue.");
+				JLabel lblPressAnyKey = new JLabel();
+				
+				//Make the label give the previous levels password
+				if (level.ID > 1) {
+					lblPressAnyKey.setText("The password for this level is: "+this.level.getLevelPassword());
+				} else {
+					lblPressAnyKey.setText("Good Luck!");
+				}
+				
 				lblPressAnyKey.setHorizontalAlignment(SwingConstants.LEFT);
 				buttonPane.add(lblPressAnyKey);
 			}

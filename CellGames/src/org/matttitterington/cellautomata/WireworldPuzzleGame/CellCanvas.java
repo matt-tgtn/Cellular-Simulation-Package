@@ -107,10 +107,11 @@ public class CellCanvas extends JPanel implements MouseListener{
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		//can only edit while the game is not running
-		if (!this.parent.running && parent.mouse1Down) {
+		if (!this.parent.running && parent.mouse1Down && this.state == parent.cellTypeClicked) {
 			
 				
 			//Cycle between wire and empty
+			
 			if (this.state == CellCanvas.EMPTY) {
 				this.setState(CellCanvas.WIRE);
 			} else if (this.state == CellCanvas.WIRE) {
@@ -131,6 +132,7 @@ public class CellCanvas extends JPanel implements MouseListener{
 	public void mousePressed(MouseEvent e) {
 		if (e.getButton() == MouseEvent.BUTTON1 && !parent.running) {
 			parent.mouse1Down = true;
+			parent.cellTypeClicked = this.state;
 			
 			//Cycle between wire and empty
 			if (this.state == CellCanvas.EMPTY) {

@@ -110,6 +110,9 @@ public class PasswordEntryDialog extends JDialog {
 						int level = Integer.parseInt(textLevel.getText());
 						String password = textPassword.getText();
 						
+						
+						
+						//Get the correct password hash
 						String correctPass = parent.puzzleRunner.levelParser.getLevel(level).getLevelPassword();
 						
 						if (password.equalsIgnoreCase(correctPass)) {

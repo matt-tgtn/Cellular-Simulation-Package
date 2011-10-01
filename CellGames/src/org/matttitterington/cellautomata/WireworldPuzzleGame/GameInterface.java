@@ -43,7 +43,10 @@ public class GameInterface extends JFrame{
 	int cellArrayHeight;
 	boolean running;
 	int fps;
+	
+	//Mouse click and drag
 	boolean mouse1Down;
+	int cellTypeClicked;
 	
 	int[] inputAPos;
 	int[] inputBPos;
